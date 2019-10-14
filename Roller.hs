@@ -2,24 +2,40 @@ module Roller where
 
 import System.Random
 import Data.List
-
-data Roll  = Total  Int
-            | Dice  [Int]
-
--- rollSum :: Int -> [IO Int] -> Int
--- rollSum total rolls = do
---   n <- rolls !! 1
---   drop 1 rolls
---   rollSum (total+n) rolls
+import System.IO.Unsafe
 
 
-listRoller :: Int -> Int ->[Int] -> IO [Int]
+data Roll  = Roll Int [Int]
+
+makeRoll :: [Int] -> Roll
+makeRoll list =
+  Roll (listSum list) list
+
+rollxdy :: Int->Int->Roll
+rollxdy x y =
+  makeRoll (listRoller x y [])
+
+
+
+
+
+-- listRoller :: Int -> Int ->[Int] -> IO [Int]
+-- listRoller a b list =
+--   if a == 0 || b == 0
+--     then
+--       return  list
+--     else do
+--       n <- getStdRandom (randomR (1,b))
+--       listRoller (a-1) b (n : list)
+
+
+listRoller :: Int -> Int ->[Int] -> [Int]
 listRoller a b list =
   if a == 0 || b == 0
     then
-      return  list
+      return list !! 0
     else do
-      n <- getStdRandom (randomR (1,b))
+      let n = unsafePerformIO (getStdRandom (randomR (1,b)))
       listRoller (a-1) b (n : list)
 
 listSum :: [Int]->Int
@@ -36,11 +52,11 @@ listKstL list  k =
   (sort list) !! (k-1)
 
 listKeepHklist :: [Int] -> Int -> [Int]
-listKeepHlist list k =
+listKeepHklist list k =
   fst (splitAt k (reverse (sort list)))
 
 listKeepLklist :: [Int] -> Int -> [Int]
-listKeepLlist list k =
+listKeepLklist list k =
     fst (splitAt k (sort list))
 
 roller :: Int -> Int -> Int ->  IO Int
