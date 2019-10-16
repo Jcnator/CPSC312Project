@@ -3,11 +3,15 @@ module PlayNeedBeforeGreed where
 
 import NeedBeforeGreed
 import Roller
+import Printer
 --import Parser
 
+import Data.List
 import System.IO
 import Text.Read   (readMaybe)
 import Data.Maybe   (fromJust)
+import Control.Monad
+
 
 playNeedBeforeGreed :: [NB4G] -> IO [NB4G]
 playNeedBeforeGreed state = do
@@ -15,36 +19,35 @@ playNeedBeforeGreed state = do
   line <- getLine
   if line == "0"
     then do
-      putStrLn "Need Before Greed has ended"
       if state /= []
         then do
           let resultState = rollResult state
-          --let winner = winner resultState
-          -- let winnerName = name winner
-          -- let winnerType = rollType winner
-          -- let winnerResult = result winner
-          putStrLn ("Winner is: " ++ show (winnerNB4G resultState))
-          return resultState
-      else
+          mapM (printNB4G) resultState
+          let winner = winnerNB4G resultState
+          let winner_name = name winner
+          putStrLn ("Winner is: " ++ winner_name ++ "!")
+          return []
+      else do
+        putStrLn "Need Before Greed has ended"
         return []
     else do
       putStrLn "Pass (1), Greed (2) or Need (3)?"
       line2 <- getLine
       if line2 == "1"
         then do
-          putStrLn "Selected Pass"
+          putStrLn (line ++ " Selected Pass")
           let newRoller = (NB4G line Pass 0)
           let newState = addNewRoller newRoller state
           playNeedBeforeGreed newState
       else if line2 == "2"
         then do
-          putStrLn "Selected Greed"
+          putStrLn (line ++ " Selected Greed")
           let newRoller = (NB4G line Greed 0)
           let newState = addNewRoller newRoller state
           playNeedBeforeGreed newState
       else if line2 == "3"
         then do
-          putStrLn "Selected Need"
+          putStrLn (line ++ " Selected Need")
           let newRoller = (NB4G line Need 0)
           let newState = addNewRoller newRoller state
           playNeedBeforeGreed newState
@@ -60,3 +63,4 @@ playNeedBeforeGreed state = do
 rollResult :: [NB4G]-> [NB4G]
 rollResult [] = []
 rollResult rollers = rollNB4G (rollers)
+
