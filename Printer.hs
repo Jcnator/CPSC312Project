@@ -14,7 +14,7 @@ module Printer where
     let dice = rolls roll
     putStrLn("Rolled a " ++ show tot ++ "from " ++ show dice)
 
-  printNB4G :: NB4G -> IO NB4G
+  printNB4G :: NB4G -> IO ()
   printNB4G player = do
     let n = name player
     let rt = rolltype player
