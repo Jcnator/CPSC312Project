@@ -25,7 +25,7 @@ Example: 4d6kL3 returns the lowest 3 dice of the four rolls
 
 Example: 4d6kL3 returns the lowest 3 dice of the four rolls
 
-#Play Need Before Greed with the '$' command
+# Play Need Before Greed with the '$' command
 
 Need Before Greed is a lottery "game" inspired by the World of Warcraft loot distribution system of the same name. Players decide if a particular item is something they "Need" or its something they'd just like to sell (Greed). The option to pass is also included in case of future expansion to make this a timed event.
 
