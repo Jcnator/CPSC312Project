@@ -23,7 +23,6 @@ Example: 4d6kH3 returns the highest 3 dice of the four rolls
 
 Example: 4d6kL3 returns the lowest 3 dice of the four rolls
 
-Example: 4d6kL3 returns the lowest 3 dice of the four rolls
 
 # Play Need Before Greed with the '$' command
 
