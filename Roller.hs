@@ -5,20 +5,19 @@ import Data.List
 import System.IO.Unsafe
 
 -- Roll is made of a final "result" which is the sum of
--- the individual rolls. Roll also has a discarted field that holds
+-- the individual rolls. Roll also has a discarded field that holds
 -- any of the dice rolled that were not used for the total
 data Roll  = Roll {total :: Int
                   , rolls :: [Int]
-                  , discarted :: [Int]
+                  , discarded :: [Int]
                   } deriving (Show)
 
 -- Creates a Roll data type, the first member of the input is used rolls
--- The second member of the input tuple is the rolls that are to be discarted
+-- The second member of the input tuple is the rolls that are to be discarded
 -- input is a tuple to pass the results of the roller functions directly to
 -- make roll since it has a random element in it
 makeRoll :: ([Int],[Int]) -> Roll
-makeRoll input  =
-  Roll (listSum (fst input)) (fst input) (snd input)
+makeRoll input  = Roll (listSum (fst input)) (fst input) (snd input)
 
 -- Basic roll: rolls x number of y sided dice
 rollxdy :: Int->Int->Roll
