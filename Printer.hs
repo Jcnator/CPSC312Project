@@ -13,10 +13,10 @@ module Printer where
   printRoll roll = do
     let tot = total roll
     let dice = rolls roll
-    let discarted_dice = discarted roll
-    if discarted_dice == []
+    let discarded_dice = discarded roll
+    if discarded_dice == []
       then putStrLn("Rolled: " ++ show tot ++ " from " ++ show dice)
-      else putStrLn("Rolled: " ++ show tot ++ " from " ++ show dice ++ " discarting " ++ show discarted_dice)
+      else putStrLn("Rolled: " ++ show tot ++ " from " ++ show dice ++ " discarded " ++ show discarded_dice)
 
   -- Prints the contents of a NB4G
   printNB4G :: NB4G -> IO ()
@@ -25,4 +25,3 @@ module Printer where
     let rt = rolltype player
     let r = result player
     putStrLn(show rt ++ " Roll- " ++ show r ++ " by " ++  n)
-  
