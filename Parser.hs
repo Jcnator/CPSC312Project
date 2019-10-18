@@ -34,7 +34,6 @@ module Parser where
           putStrLn "Keep the the K higher or lower dice:"
           putStrLn "  Example: 4d6kH3 returns the highest 3 dice of the four rolls"
           putStrLn "  Example: 4d6kL3 returns the lowest 3 dice of the four rolls"
-          putStrLn "  Example: 4d6kL3 returns the lowest 3 dice of the four rolls"
           putStrLn ""
           putStrLn "Play Need Before Greed with the '$' command"
 
