@@ -6,9 +6,6 @@ module Parser where
   import Text.Read
   import PlayNeedBeforeGreed
 
-  --{-# LANGUAGE BlockArguments #-}
-
-
   mainParser:: String->IO ()
   mainParser input = do
     let key_val = head input
