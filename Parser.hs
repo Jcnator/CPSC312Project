@@ -6,6 +6,13 @@ module Parser where
   import Text.Read
   import PlayNeedBeforeGreed
 
+
+
+
+  -- mainParser: Main Parsing function that parses the command line input string into a set of valid integers
+  -- And calls the rolldice and needBeforeGreed functions, essentially initializing the game
+  -- If input string from command line is not a valid integer it handles those cases with Invalid Input returns
+  -- Provides a list of all commmands and distributes variables to their respective cases depending on the input command
   mainParser:: String->IO ()
   mainParser input = do
     let key_val = head input
@@ -77,7 +84,10 @@ module Parser where
 
 
 
-
+-- makeLists: Makes Lists of strings accordingly from the command line input and the separator
+-- i.e. "2d10" gets broken into ["2" ,"10"]
+-- It takes care of grabbing the integer part of the command line strings in order to make lists which are then parsed
+-- the separator is a function that makes sure that the string is separated at the right place, it should always be a "k" or a "d"
   makeLists :: (Char->Bool)->String -> [String]
   makeLists sep [] = [[]]
   makeLists sep (h:t)
@@ -85,14 +95,26 @@ module Parser where
       | otherwise = ((h:w):rest)
                   where w:rest = makeLists sep t
 
+
+  -- helper function that gets passed into the makeLists function as the separator input, 
+  -- checks for the "d" string in the input
   separator_d :: Char -> Bool
   separator_d char = char == 'd'
+
+  -- helper function that gets passed into the makeLists function as the separator input, 
+  -- checks for the "k" string in the input
 
   separator_k :: Char -> Bool
   separator_k char = char == 'k'
 
+  -- helper function that gets passed into the makeLists function as the separator input, 
+  -- checks for the "d" or the "k" string in the input
+
   separator_dnk :: Char -> Bool
   separator_dnk char = char == 'd' || char == 'k'
 
+
+  --toInt: reads the String arguments given by the command line and returns either a valid integer or an exception which is handled
+  -- in the mainParser function
   toInt :: String -> Maybe Int
   toInt = readMaybe
