@@ -78,4 +78,3 @@ listKeepHklist list k = (splitAt k (reverse (sort list)))
 -- all the other values as the second member
 listKeepLklist :: [Int] -> Int -> ([Int],[Int])
 listKeepLklist list k = (splitAt k (sort list))
-
